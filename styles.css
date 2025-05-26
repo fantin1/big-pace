@@ -1,0 +1,29 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+svg,
+img, picture{
+    display: block;
+    max-width: 100%;
+}
+
+.header{
+    background-color: rgb(33, 38, 44);
+    color: bisque;
+}
+
+@media (min-width: 900px){
+.header{
+    width: 400px;
+    height: 100vh;
+}
+
+.workout-info{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+}
+
