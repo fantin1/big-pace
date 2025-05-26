@@ -5,25 +5,72 @@
 }
 
 svg,
-img, picture{
+img,
+picture {
     display: block;
     max-width: 100%;
 }
 
-.header{
-    background-color: rgb(33, 38, 44);
-    color: bisque;
+:root{
+    --clr-neutral: #3D5467;
+    --clr-neutral-bright: #F1EDEE;
+    --clr-primary: #DB5461;
 }
 
-@media (min-width: 900px){
-.header{
-    width: 400px;
-    height: 100vh;
+.hidden {
+    display: none;
 }
 
-.workout-info{
+.header {
+    background-color: var(--clr-neutral);
+    color: var(--clr-neutral-bright);
+}
+
+@media (min-width: 900px) {
+    .header {
+        width: 400px;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+        padding: 1em;
+    }
+}
+
+.workout-form{
+    border: 1px solid var(--clr-neutral-bright);
+    padding: 1em;
+    display: grid;
+    gap: 1em;
+}
+
+.submit-button{
+    width: 200px;
+    margin: 0 auto;
+    background-color: var(--clr-primary);
+    color: var(--clr-neutral-bright);
+    padding: .5em;
+    border-radius: 50px;
+    border: none;
+}
+
+.submit-button:hover{
+    background-color: var(--clr-neutral-bright);
+    color: var(--clr-primary);
+}
+
+.workout-form-item{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 15em;
+}
+
+.workout-item {
+    border: 1px solid var(--clr-neutral-bright);
+    padding: 1em;
+}
+
+.workout-info {
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
-}
-
