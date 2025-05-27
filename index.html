@@ -5,52 +5,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Big Pace</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <link rel="stylesheet" href="styles.css">
-    <script defer src="script.js"></script>
+    <script type="module" defer src="script.js"></script>
 </head>
 
 <body>
-    <header class="header">
-        <h1>🏃Big Pace</h1>
-        <form class="workout-form">
-            <div class="workout-form-item">
-                <label for="distance">Distância</label>
-                <input type="text" name="distance" id="distance" placeholder="km">
-            </div>
-            <div class="workout-form-item">
-                <label for="duration">Duração</label>
-                <input type="text" name="duration" id="duration" placeholder="min">
-            </div>
-            <button class="submit-button">Enviar</button>
-        </form>
-
-        <ul>
-            <li class="workout-item">
-                <h2>João Pessoa 2 de março</h2>
-                <div class="workout-info">
-                    <div>
-                        <span>🏃 Distância</span><span> 10 Km</span>
-                    </div>
-                    <div>
-                        <span>🕒 Duração</span><span> 45 min</span>
-                    </div>
-                    <div>
-                        <span>👟 Ritmo</span><span> 4,5 min/km</span>
-                    </div>
-                    <div>
-                        <span>⚡Velocidade</span><span> 13,3 Km/h</span>
-                    </div>
+    <section id="app">
+        <header class="header">
+            <h1>🏃Big Pace</h1>
+            <form class="workout-form hidden">
+                <div class="workout-form-item">
+                    <label for="distance">Distância</label>
+                    <input class="input-distance" type="text" name="distance" id="distance" placeholder="km">
                 </div>
-            </li>
-            
-        </ul>
-    </header>
+                <div class="workout-form-item">
+                    <label for="duration">Duração</label>
+                    <input class="input-duration" type="text" name="duration" id="duration" placeholder="min">
+                </div>
+                <button class="submit-button">Enviar</button>
+            </form>
 
-    <main>
-        <section class="map">
+            <ul>
+                <li class="workout-item">
+                    <h2>João Pessoa 2 de março</h2>
+                    <div class="workout-info">
+                        <div>
+                            <span>🏃 Distância</span><span> 10 Km</span>
+                        </div>
+                        <div>
+                            <span>🕒 Duração</span><span> 45 min</span>
+                        </div>
+                        <div>
+                            <span>👟 Ritmo</span><span> 4,5 min/km</span>
+                        </div>
+                        <div>
+                            <span>⚡Velocidade</span><span> 13,3 Km/h</span>
+                        </div>
+                    </div>
+                </li>
 
-        </section>
-    </main>
+            </ul>
+        </header>
+
+        <main>
+            <div class="map" id="map">
+
+            </div>
+        </main>
+    </section>
+
 </body>
 
 </html>
