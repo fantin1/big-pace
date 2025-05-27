@@ -80,7 +80,7 @@ picture {
     width: 15em;
 }
 
-.workout-item {
+.workout-list-item {
     border: 1px solid var(--clr-neutral-bright);
     padding: 1em;
 }
