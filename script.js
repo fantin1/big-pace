@@ -2,7 +2,6 @@
 
 import { v4 as uuidv4 } from 'https://cdn.jsdelivr.net/npm/uuid@9.0.0/+esm';
 
-
 class Workout {
     id = uuidv4();
     date = new Date();
@@ -12,6 +11,8 @@ class Workout {
         this.coords = coords;
         this.#calcPace();
         this.#calcSpeed();
+        this.#getDisplayDate();
+        this.title = this.displayDate; //later replace with location
     }
 
     #calcSpeed() {
@@ -23,11 +24,20 @@ class Workout {
         this.speed = this.duration / this.distance;
         return this;
     }
+
+    #getDisplayDate() {
+        const day = this.date.getDate();
+        const month = this.date.getMonth();
+        const hours = this.date.getHours();
+        this.displayDate = `${(day + '').padStart(2, '0')}/${(month + '').padStart(2, '0')} as ${hours} horas`;
+        return this;
+    }
 }
 
 const form = document.querySelector('.workout-form');
 const inputDistance = document.querySelector('.input-distance');
 const inputDuration = document.querySelector('.input-duration');
+const workoutList = document.querySelector('.workout-list');
 
 
 class App {
@@ -51,20 +61,18 @@ class App {
 
             this.#map.on('click', this.#newForm.bind(this))
 
-            //L.marker(coords).addTo(this.#map)
-            //    .bindPopup('A pretty CSS popup.<br> Easily customizable.')
-            //    .openPopup();
+            
         }, () => alert(`Couldn't get geolocation`));
     }
 
-    #newForm(e){
+    #newForm(e) {
         form.classList.remove('hidden');
         inputDistance.value = inputDuration.value = '';
         inputDistance.select();
         this.#coords = e.latlng;
     }
 
-    #newWorkout(e){
+    #newWorkout(e) {
         const validInputs = (...inputs) => inputs.every((input) => (isFinite(input) && input > 0 && input < 1000));
         e.preventDefault();
 
@@ -72,17 +80,49 @@ class App {
         const distance = inputDistance.value;
         const duration = inputDuration.value;
         // validate input
-        if(!validInputs(distance, duration)) return;
+        if (!validInputs(distance, duration)) return;
 
         // create workout
         const workout = new Workout(distance, duration, this.#coords);
-        console.log(workout);
+        this.workouts.push(workout);
+
         // add to sidebar
+        this.#renderWorkout(workout);
 
         // add marker
-
+        this.#renderWorkoutMarker(workout);
         // save to local storage 
     }
+
+    #renderWorkout(workout) {
+        const html = `
+                <li class="workout-list-item" data-id="${workout.id}">
+                    <h2 class="workout-title">${workout.title}</h2>
+                    <div class="workout-info">
+                        <div class="info-item">
+                            <span class="info-icon">🏃</span><span class="info-name"> Distância</span><span class="info-value"> ${workout.distance} </span><span class="info-unit"> Km </span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-icon">🕒</span><span class="info-name"> Duração</span><span class="info-value"> ${workout.duration} </span> <span class="info-unit"> min</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-icon">👟</span><span class="info-name"> Ritmo</span><span class="info-value"> ${workout.pace.toFixed(1)} </span><span class="info-unit"> min/km</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-icon">⚡</span><span class="info-name"> Velocidade</span><span class="info-value"> ${workout.speed.toFixed(1)} </span><span class="info-unit"> Km/h</span>
+                        </div>
+                    </div>
+                </li>
+        `;
+        workoutList.insertAdjacentHTML('afterbegin', html);
+    }
+
+    #renderWorkoutMarker(workout){
+        L.marker(workout.coords).addTo(this.#map)
+               .bindPopup(`${workout.title}`)
+               .openPopup();
+    }
+
 
 }
 

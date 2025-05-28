@@ -11,22 +11,25 @@ picture {
     max-width: 100%;
 }
 
-:root{
-    --clr-neutral: #3D5467;
-    --clr-neutral-bright: #F1EDEE;
-    --clr-primary: #DB5461;
+:root {
+
 }
 
 .hidden {
     display: none !important;
 }
 
-.header {
-    background-color: var(--clr-neutral);
-    color: var(--clr-neutral-bright);
+li {
+    list-style: none;
 }
 
-#app{
+.header {
+    background-color: #22333b;
+    color: #E1E9EB;
+    height: 100%;
+}
+
+#app {
     display: grid;
     grid-template-rows: 1fr 3fr;
 }
@@ -42,24 +45,24 @@ picture {
         border-radius: 1em 0 0 1em;
     }
 
-    #app{
+    #app {
         display: grid;
         grid-template-rows: unset;
         grid-template-columns: 1fr 4fr;
         padding: 1em;
         height: 100vh;
     }
-    
+
 }
 
-.workout-form{
+.workout-form {
     border: 1px solid var(--clr-neutral-bright);
     padding: 1em;
     display: grid;
     gap: 1em;
 }
 
-.submit-button{
+.submit-button {
     width: 200px;
     margin: 0 auto;
     background-color: var(--clr-primary);
@@ -69,15 +72,20 @@ picture {
     border: none;
 }
 
-.submit-button:hover{
+.submit-button:hover {
     background-color: var(--clr-neutral-bright);
     color: var(--clr-primary);
 }
 
-.workout-form-item{
+.workout-form-item {
     display: grid;
     grid-template-columns: 1fr 1fr;
     width: 15em;
+}
+
+.list-wrapper {
+    height: 60vh;
+    overflow-y: scroll;
 }
 
 .workout-list-item {
@@ -88,9 +96,11 @@ picture {
 .workout-info {
     display: grid;
     grid-template-columns: 1fr 1fr;
+
 }
 
-.map{
+
+.map {
     height: 100%;
     border-radius: 0 1em 1em 0;
 }

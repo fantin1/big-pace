@@ -1,0 +1,17 @@
+@theme {
+  --color-cape-cod-50: #F5F5F5;
+  --color-cape-cod-100: #EBEDEC;
+  --color-cape-cod-300: #ABB3AE;
+  --color-cape-cod-500: #3b413c;
+  --color-cape-cod-700: #213023;
+  --color-cape-cod-900: #0C1C0D;
+}
+
+@theme {
+  --color-burnt-orange-200: #F5DCBC;
+  --color-burnt-orange-300: #EDC498;
+  --color-burnt-orange-400: #E08D51;
+  --color-burnt-orange-500: #D45113;
+  --color-burnt-orange-700: #9E350B;
+  --color-burnt-orange-900: #5E1904;
+}
