@@ -2,6 +2,13 @@
 
 import { v4 as uuidv4 } from 'https://cdn.jsdelivr.net/npm/uuid@9.0.0/+esm';
 
+class User {
+    constructor(name, weight){
+        this.name = name;
+        this.weight = weight;
+    }
+}
+
 class Workout {
     id = uuidv4();
     date = new Date();
@@ -13,6 +20,7 @@ class Workout {
         this.#calcSpeed();
         this.#getDisplayDate();
         this.title = this.displayDate; //later replace with location
+        this.#calcBurnedCals();
     }
 
     #calcSpeed() {
@@ -32,6 +40,12 @@ class Workout {
         this.displayDate = `${(day + '').padStart(2, '0')}/${(month + '').padStart(2, '0')} as ${hours} horas`;
         return this;
     }
+
+    #calcBurnedCals(){
+        this.burnedCals = 500;
+        return this;
+    }
+
 }
 
 const form = document.querySelector('.workout-form');
@@ -45,6 +59,7 @@ class App {
     #zoomLevel = 13;
     #coords;
     workouts = [];
+    #user = new User('Pedro', 60);
     constructor() {
         this.#initMap();
         form.addEventListener('submit', this.#newWorkout.bind(this));
@@ -92,27 +107,34 @@ class App {
         // add marker
         this.#renderWorkoutMarker(workout);
         // save to local storage 
+
+        inputDistance.value = inputDuration.value = '';
+        form.classList.add('hidden');
     }
 
     #renderWorkout(workout) {
         const html = `
-                <li class="workout-list-item" data-id="${workout.id}">
-                    <h2 class="workout-title">${workout.title}</h2>
-                    <div class="workout-info">
-                        <div class="info-item">
-                            <span class="info-icon">🏃</span><span class="info-name"> Distância</span><span class="info-value"> ${workout.distance} </span><span class="info-unit"> Km </span>
+                    <li class="workout-list-item" data-id="${workout.id}">
+                        <h2 class="workout-title">${workout.title}</h2>
+                        <div class="workout-info">
+                            <div class="info-item">
+                                <span class="info-value">${workout.distance}</span>
+                                <span class="info-unit">km</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-value">${workout.duration}</span>
+                                <span class="info-unit">min</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-value">${workout.pace.toFixed(1)}</span>
+                                <span class="info-unit">min/km</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-value">${workout.burnedCals.toFixed(0)}</span>
+                                <span class="info-unit">Kcal</span>
+                            </div>
                         </div>
-                        <div class="info-item">
-                            <span class="info-icon">🕒</span><span class="info-name"> Duração</span><span class="info-value"> ${workout.duration} </span> <span class="info-unit"> min</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-icon">👟</span><span class="info-name"> Ritmo</span><span class="info-value"> ${workout.pace.toFixed(1)} </span><span class="info-unit"> min/km</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-icon">⚡</span><span class="info-name"> Velocidade</span><span class="info-value"> ${workout.speed.toFixed(1)} </span><span class="info-unit"> Km/h</span>
-                        </div>
-                    </div>
-                </li>
+                    </li>
         `;
         workoutList.insertAdjacentHTML('afterbegin', html);
     }
@@ -122,7 +144,6 @@ class App {
                .bindPopup(`${workout.title}`)
                .openPopup();
     }
-
 
 }
 

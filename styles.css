@@ -12,7 +12,31 @@ picture {
 }
 
 :root {
+    --clr-primary-100: #EFF5E9;
+    --clr-primary-300: #C4DBB2;
+    --clr-primary-400: #95BF80;
+    --clr-primary-500: #68a357;
+    --clr-primary-600: #569447;
+    --clr-primary-700: #3E7A31;
+    --clr-primary-900: #1A4A12;
 
+    --clr-accent-100: #FFFCED;
+    --clr-accent-300: #FFF1B3;
+    --clr-accent-500: #FDCA40;
+    --clr-accent-900: #73430D;
+
+    --clr-neutral-100: #E1E9EB;
+    --clr-neutral-200: #BACACF;
+    --clr-neutral-300: #92A9B0;
+    --clr-neutral-400: #536C75;
+    --clr-neutral-500: #22333b;
+    --clr-neutral-600: #1C2D36;
+    --clr-neutral-700: #13212B;
+    --clr-neutral-900: #07101A;
+}
+
+html {
+    font-family: sans-serif;
 }
 
 .hidden {
@@ -24,8 +48,8 @@ li {
 }
 
 .header {
-    background-color: #22333b;
-    color: #E1E9EB;
+    background-color: var(--clr-neutral-600);
+    color: var(--clr-accent-100);
     height: 100%;
 }
 
@@ -56,7 +80,7 @@ li {
 }
 
 .workout-form {
-    border: 1px solid var(--clr-neutral-bright);
+    border: 1px solid var(--clr-neutral-300);
     padding: 1em;
     display: grid;
     gap: 1em;
@@ -65,16 +89,16 @@ li {
 .submit-button {
     width: 200px;
     margin: 0 auto;
-    background-color: var(--clr-primary);
-    color: var(--clr-neutral-bright);
+    background-color: var(--clr-primary-600);
+    color: var(--clr-accent-100);
     padding: .5em;
     border-radius: 50px;
     border: none;
 }
 
 .submit-button:hover {
-    background-color: var(--clr-neutral-bright);
-    color: var(--clr-primary);
+    background-color: var(--clr-accent-500);
+    color: var(--clr-neutral-700);
 }
 
 .workout-form-item {
@@ -88,17 +112,57 @@ li {
     overflow-y: scroll;
 }
 
+.workout-list {
+    display: grid;
+    gap: .22em;
+}
+
 .workout-list-item {
-    border: 1px solid var(--clr-neutral-bright);
-    padding: 1em;
+    background-color: var(--clr-neutral-500);
+    border: 1px dotted var(--clr-neutral-400);
+    padding: .5rem;
+    border-radius: .5rem;
+}
+
+.workout-list-item:hover {
+    border: 1px dotted var(--clr-accent-500);
+    cursor: pointer;
 }
 
 .workout-info {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-
+    grid-template-columns: repeat(4, 1fr);
 }
 
+.workout-title {
+    margin: 0 0 .5em 0;
+    font-size: 1.2rem;
+    font-weight: normal;
+    color: var(--clr-accent-500);
+}
+
+.info-item {
+    display: grid;
+    width: 4rem;
+    aspect-ratio: 1/1;
+    border-radius: 5rem;
+    background-color: var(--clr-primary-500);
+    border: 1px solid var(--clr-accent-100);
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.info-value {
+    color: var(--clr-accent-100);
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.info-unit {
+    color: var(--clr-primary-300);
+    font-size: .8rem;
+}
 
 .map {
     height: 100%;
