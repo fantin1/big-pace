@@ -17,46 +17,35 @@
 <body>
     <section id="app">
         <header class="header">
+            <div class="user-info hidden">
+                <span class="user-name">Pedro</span><span class="user-weight">60 kg</span>
+            </div>
             <h1>🏃Big Pace</h1>
-            <form class="workout-form hidden">
-                <div class="workout-form-item">
-                    <label for="distance">Distância</label>
-                    <input class="input-distance" type="text" name="distance" id="distance" placeholder="km">
+
+            <div class="form-list-wrapper">
+                <form class="workout-form hidden">
+                    <div class="workout-form-item">
+                        <label for="distance">Distância</label>
+                        <input class="input-distance" type="text" name="distance" id="distance" placeholder="km">
+                    </div>
+                    <div class="workout-form-item">
+                        <label for="duration">Duração</label>
+                        <input class="input-duration" type="text" name="duration" id="duration" placeholder="min">
+                    </div>
+                    <button class="submit-button">Enviar</button>
+                </form>
+                <div class="list-wrapper">
+                    <ul class="workout-list ">
+
+                    </ul>
                 </div>
-                <div class="workout-form-item">
-                    <label for="duration">Duração</label>
-                    <input class="input-duration" type="text" name="duration" id="duration" placeholder="min">
-                </div>
-                <button class="submit-button">Enviar</button>
-            </form>
-            <div class="list-wrapper">
-                <ul class="workout-list">
-                 <!--    
-                    <li class="workout-list-item" data-id="">
-                        <h2 class="workout-title">João Pessoa 2 de março</h2>
-                        <div class="workout-info">
-                            <div class="info-item">
-                                <span class="info-value">20</span>
-                                <span class="info-unit">km</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-value">45</span>
-                                <span class="info-unit">min</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-value">3.7</span>
-                                <span class="info-unit">min/km</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-value">478</span>
-                                <span class="info-unit">Kcal</span>
-                            </div>
-                        </div>
-                    </li>
-                -->
-                </ul>
+
             </div>
 
+            <div class="footer">
+                <p>Footer . Footer . Footer . Footer . Footer . Footer</p>
+                <p>footerfooterfooterfooterfooterfooterfooterfooterfooter</p>
+            </div>
         </header>
 
         <main>
