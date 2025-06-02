@@ -22,15 +22,16 @@ class Workout {
         this.#getDisplayDate();
         this.title = this.displayDate; //later replace with location
         this.#calcBurnedCals();
+        this.#getTitle();
     }
 
     #calcSpeed() {
-        this.pace = this.distance / (this.duration / 60);
+        this.speed = this.distance / (this.duration / 60);
         return this;
     }
 
     #calcPace() {
-        this.speed = this.duration / this.distance;
+        this.pace = this.duration / this.distance;
         return this;
     }
 
@@ -42,8 +43,14 @@ class Workout {
         return this;
     }
 
+    #getTitle(){
+        
+    }
+
     #calcBurnedCals() {
         // 1 MET ~= 1Kcal / kg body weight
+        // 17085 2.5 walking bird watching, slow walk
+        // 17088 4.5 walking marching, moderate speed, military, no pack
         // 12029 6.0 running Running, 6.44 km/h (8.06 min/km)
         // 12030 8.3 running running, 8.05 km/h (7.46 min/km)
         // 12040 9.0 running running, 8.37 km/h (7.14 min/km)
@@ -59,16 +66,17 @@ class Workout {
         // 12132 19.0 running running, 19.31 km/h (3.11 min/km)
         // 12134 19.8 running running, 20.92 km/h (2.86 min/km)
         // 12135 23.0 running running, 22.53 km/h (2.67 min/km)
-        // 17085 2.5 walking bird watching, slow walk
-        // 17088 4.5 walking marching, moderate speed, military, no pack
-        // 17110 6.5 walking race walking
+        // running 9.48 * X + .108
         // https://cdn-links.lww.com/permalink/mss/a/mss_43_8_2011_06_13_ainsworth_202093_sdc1.pdf?
         // note: can consider elevation gain
-        const met = 1 * this.user.weight;
-        let activityMets;
 
+        let met;
+        if(this.speed >= 6.44){
+            met = (this.speed * 0.948) + 0.108;
+        }else met = 2;
 
-        this.burnedCals = 500;
+        // Calories Burned = MET x Body Weight (kg) x Duration of Running (hours)
+        this.burnedCals = met * this.user.weight * this.duration / 60;
         return this;
     }
 
@@ -119,6 +127,7 @@ class App {
         this.#activeMarker = L.marker(this.#coords).addTo(this.#map)
             .bindPopup(`Nova corrida`)
             .openPopup();
+        console.log(this.#coords);
     }
 
     #newWorkout(e) {
@@ -132,9 +141,9 @@ class App {
         if (!validInputs(distance, duration)) return;
 
         // create workout
-        const workout = new Workout(distance, duration, this.#coords);
+        const workout = new Workout(distance, duration, this.#coords, this.#user);
         this.workouts.push(workout);
-        console.log(this.workouts);
+
         // add to sidebar
         this.#renderWorkout(workout);
 
@@ -207,8 +216,3 @@ const app = new App();
 
 
 
-
-const workout = new Workout(10, 45);
-const workout2 = new Workout(10, 45);
-const workout3 = new Workout(10, 45);
-// console.log(workout, workout2, workout3);
