@@ -12,6 +12,7 @@ class User {
 class Workout {
     id = uuidv4();
     date = new Date();
+    workoutEl;
     constructor(distance, duration, coords, user) {
         this.distance = distance;
         this.duration = duration;
@@ -22,7 +23,7 @@ class Workout {
         this.#getDisplayDate();
         this.title = this.displayDate; //later replace with location
         this.#calcBurnedCals();
-        this.#getTitle();
+        this.#getLocation();
     }
 
     #calcSpeed() {
@@ -43,8 +44,23 @@ class Workout {
         return this;
     }
 
-    #getTitle(){
-        
+    #getLocation(){
+        const url = `https://nominatim.openstreetmap.org/reverse?lat=${this.coords.lat}&lon=${this.coords.lng}&format=json`;
+        fetch(url).then((reponse) => {
+            return reponse.json();
+        }).then((data) => {
+            console.log(data);
+            this.location = data.name;
+            console.log(this.location);
+            this.#getTitle(this.location)
+        })
+    }
+
+    #getTitle(location){
+        if(location){
+            this.title = `${location} as ${this.displayDate}`;
+            this.workoutEl.querySelector('.workout-title').textContent = this.title;
+        }
     }
 
     #calcBurnedCals() {
@@ -182,6 +198,7 @@ class App {
                     </li>
         `;
         workoutList.insertAdjacentHTML('afterbegin', html);
+        workout.workoutEl = document.querySelector(`.workout-list-item[data-id="${workout.id}"]`);
     }
 
     #renderWorkoutMarker(workout) {
